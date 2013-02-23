@@ -107,7 +107,18 @@
                     return '<i class="icon-remove-sign"></i>&nbsp;';
                 }
               })();
-              return "" + icon + (Ember.String.i18n("topic.notifications." + key + ".title")) + "<span class='caret'></span>";
+              title = (function() {
+                switch (key) {
+                  case 'watching':
+                    return Ember.String.i18n('topic.notifications.watching.title');
+                  case 'tracking':
+                    return Ember.String.i18n('topic.notifications.tracking.title');
+                  case 'regular':
+                    return Ember.String.i18n('topic.notifications.regular.title');
+                  case 'muted':
+                    return Ember.String.i18n('topic.notifications.muted.title');
+                }
+              return "" + icon + title + "<span class='caret'></span>";
             }).property('topic.notification_level'),
             dropDownContent: [
               [Discourse.Topic.NotificationLevel.WATCHING, 'topic.notifications.watching'], 
